@@ -1,0 +1,43 @@
+[project]
+name = "py-task-cli"
+version = "0.1.0"
+description = "Task manager CLI with SQLite, rich TUI and Markdown export"
+requires-python = ">=3.12"
+dependencies = [
+    "rich>=13.0",
+    "typer>=0.12",
+    "sqlite-utils>=3.0",
+]
+
+[project.scripts]
+task = "py_task_cli.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-deps = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.8",
+    "mypy>=1.10",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "C4", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_ignores = true
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --cov=src --cov-report=term-missing --cov-fail-under=80"
